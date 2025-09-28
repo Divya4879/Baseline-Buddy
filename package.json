@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "AI-powered developer companion that integrates Baseline data to accelerate modern web feature adoption",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "baseline-buddy": "./cli/bin/baseline-buddy.js",
     "bb": "./cli/bin/baseline-buddy.js"
   },
   "scripts": {
     "dev": "node cli/src/index.js",
-    "build": "npm run build:cli && npm run build:extension && npm run build:web",
+    "build": "npm run build:cli && npm run build:extension",
     "build:cli": "cd cli && npm run build",
     "build:extension": "cd vscode-extension && npm run build",
-    "build:web": "cd web-dashboard && npm run build",
     "test": "npm run test:cli && npm run test:extension",
     "test:cli": "cd cli && npm test",
     "test:extension": "cd vscode-extension && npm test",
@@ -46,7 +46,6 @@
   "workspaces": [
     "cli",
     "vscode-extension",
-    "web-dashboard",
     "shared",
     "templates"
   ],
@@ -65,6 +64,6 @@
     ]
   },
   "dependencies": {
-    "web-features": "^3.1.0"
+    "web-features": "^1.0.0"
   }
 }
