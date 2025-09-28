@@ -2,6 +2,7 @@
   "name": "@baseline-buddy/cli",
   "version": "1.0.0",
   "description": "CLI tool for Baseline-powered web development",
+  "type": "module",
   "main": "src/index.js",
   "bin": {
     "baseline-buddy": "./bin/baseline-buddy.js",

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import { execSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
 const DEPLOY_TARGETS = {
   'vercel': (dir) => {
@@ -26,7 +26,7 @@ const DEPLOY_TARGETS = {
   'surge': (dir) => execSync(`surge ${dir}`, { stdio: 'inherit' })
 };
 
-function deploy(target = 'vercel', projectDir = '.') {
+export function deploy(target = 'vercel', projectDir = '.') {
   console.log(`Deploying to ${target}...`);
   
   // Build if needed
@@ -48,10 +48,3 @@ function deploy(target = 'vercel', projectDir = '.') {
     process.exit(1);
   }
 }
-
-if (require.main === module) {
-  const [,, target, dir] = process.argv;
-  deploy(target, dir);
-}
-
-module.exports = { deploy };

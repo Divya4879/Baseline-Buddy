@@ -10,7 +10,7 @@ import { deploy } from '../../scripts/deploy.js';
 let webFeatures;
 try {
   const webFeaturesModule = await import('web-features');
-  webFeatures = webFeaturesModule.features || webFeaturesModule.default?.features || webFeaturesModule;
+  webFeatures = webFeaturesModule.default || webFeaturesModule;
   console.log(chalk.green('✅ web-features loaded successfully'));
 } catch (error) {
   console.error(chalk.red('❌ Failed to load web-features:'), error.message);
@@ -42,11 +42,12 @@ program
     console.log(chalk.blue('🧪 Testing Baseline Buddy...'));
     
     // Test web-features integration
-    const featureCount = Object.keys(webFeatures.features || {}).length;
+    const featureCount = Object.keys(webFeatures.features || webFeatures || {}).length;
     console.log(chalk.green(`✅ Loaded ${featureCount} web features from Baseline data`));
     
     // Show a few example features
-    const exampleFeatures = Object.entries(webFeatures.features || {}).slice(0, 3);
+    const featuresObj = webFeatures.features || webFeatures || {};
+    const exampleFeatures = Object.entries(featuresObj).slice(0, 3);
     console.log(chalk.blue('\n📋 Example features:'));
     
     exampleFeatures.forEach(([id, feature]) => {
@@ -130,10 +131,11 @@ program
     console.log('━'.repeat(50));
     
     const limit = parseInt(options.limit) || 5;
-    const features = Object.entries(webFeatures.features || {});
+    const featuresObj = webFeatures.features || webFeatures || {};
+    const features = Object.entries(featuresObj);
     
     const results = features.filter(([id, feature]) => 
-      feature.name.toLowerCase().includes(query.toLowerCase()) ||
+      feature.name?.toLowerCase().includes(query.toLowerCase()) ||
       id.toLowerCase().includes(query.toLowerCase())
     ).slice(0, limit);
     
