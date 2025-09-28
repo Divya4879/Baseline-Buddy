@@ -1,8 +1,4 @@
 node_modules/
-demo-project/
-final-demo/
-final-test-project/
-final-test/
-my-baseline-project/
-test-app/
-test-project/
+*.log
+dist/
+build/
