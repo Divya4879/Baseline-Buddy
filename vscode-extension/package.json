@@ -1,0 +1,65 @@
+{
+  "name": "baseline-buddy",
+  "displayName": "Baseline Buddy",
+  "description": "Real-time web compatibility insights powered by Baseline data",
+  "version": "1.0.0",
+  "publisher": "baseline-buddy",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Other",
+    "Education"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/baseline-buddy.git"
+  },
+  "keywords": [
+    "baseline",
+    "web-features",
+    "compatibility",
+    "css",
+    "javascript",
+    "html"
+  ],
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:css",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "baseline-buddy.checkCompatibility",
+        "title": "Check Baseline Compatibility",
+        "category": "Baseline Buddy"
+      },
+      {
+        "command": "baseline-buddy.generateReport",
+        "title": "Generate Compatibility Report",
+        "category": "Baseline Buddy"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build": "npm run compile"
+  },
+  "dependencies": {
+    "web-features": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
