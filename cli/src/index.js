@@ -39,8 +39,6 @@ program
   .command('test')
   .description('🧪 Test Baseline Buddy functionality')
   .action(() => {
-    console.log(chalk.blue('🧪 Testing Baseline Buddy...'));
-    
     // Test web-features integration
     const featureCount = Object.keys(webFeatures.features || webFeatures || {}).length;
     console.log(chalk.green(`✅ Loaded ${featureCount} web features from Baseline data`));
@@ -127,9 +125,6 @@ program
   .argument('<query>', 'Search query for features')
   .option('-l, --limit <number>', 'Limit number of results', '5')
   .action((query, options) => {
-    console.log(chalk.blue(`🔎 Searching for: "${query}"`));
-    console.log('━'.repeat(50));
-    
     const limit = parseInt(options.limit) || 5;
     const featuresObj = webFeatures.features || webFeatures || {};
     const features = Object.entries(featuresObj);

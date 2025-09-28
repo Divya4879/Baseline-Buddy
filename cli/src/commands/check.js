@@ -27,7 +27,7 @@ export function checkCommand(projectPath = '.', options = {}) {
       process.exit(1);
     }
     
-    console.log(chalk.blue('🔍 Analyzing project for Baseline compatibility...'));
+    console.log(chalk.blue('🔍 Analyzing project...'));
     
     // Scan files
     const detectedFeatures = scanDirectory(absolutePath);
