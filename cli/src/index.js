@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
-const { Command } = require('commander');
-const chalk = require('chalk');
-const path = require('path');
-const { injectPolyfills } = require('../../shared/polyfill-injector');
-const { deploy } = require('../../scripts/deploy');
+import { Command } from 'commander';
+import chalk from 'chalk';
+import path from 'path';
+import { injectPolyfills } from '../../shared/polyfill-injector.js';
+import { deploy } from '../../scripts/deploy.js';
 
 // Import web-features to test integration
 let webFeatures;
 try {
-  webFeatures = require('web-features');
+  const webFeaturesModule = await import('web-features');
+  webFeatures = webFeaturesModule.features || webFeaturesModule.default?.features || webFeaturesModule;
   console.log(chalk.green('✅ web-features loaded successfully'));
 } catch (error) {
   console.error(chalk.red('❌ Failed to load web-features:'), error.message);
@@ -64,8 +65,9 @@ program
   .argument('<project-name>', 'Name of the project to create')
   .option('-t, --template <type>', 'Template type (html, react, vue, next)', 'html')
   .action((projectName, options) => {
-    const { initCommand } = require('./commands/init');
-    initCommand(projectName, options);
+    import('./commands/init.js').then(({ initCommand }) => {
+      initCommand(projectName, options);
+    });
   });
 
 // Check compatibility command
@@ -77,8 +79,9 @@ program
   .option('-f, --file <path>', 'Save report to file')
   .option('-b, --baseline-level <level>', 'Target Baseline level', '2024')
   .action((projectPath, options) => {
-    const { checkCommand } = require('./commands/check');
-    checkCommand(projectPath, options);
+    import('./commands/check.js').then(({ checkCommand }) => {
+      checkCommand(projectPath, options);
+    });
   });
 
 // Polyfill injection command
@@ -88,17 +91,18 @@ program
   .argument('<file>', 'HTML file to process')
   .option('-b, --browsers <browsers>', 'Target browsers (comma-separated)', 'ie 11')
   .action((file, options) => {
-    const fs = require('fs');
-    const browsers = options.browsers.split(',').map(b => b.trim());
-    
-    try {
-      const content = fs.readFileSync(file, 'utf8');
-      const enhanced = injectPolyfills(content, browsers);
-      fs.writeFileSync(file, enhanced);
-      console.log(chalk.green(`✅ Polyfills injected into ${file}`));
-    } catch (error) {
-      console.error(chalk.red('❌ Error:'), error.message);
-    }
+    import('fs').then(fs => {
+      const browsers = options.browsers.split(',').map(b => b.trim());
+      
+      try {
+        const content = fs.readFileSync(file, 'utf8');
+        const enhanced = injectPolyfills(content, browsers);
+        fs.writeFileSync(file, enhanced);
+        console.log(chalk.green(`✅ Polyfills injected into ${file}`));
+      } catch (error) {
+        console.error(chalk.red('❌ Error:'), error.message);
+      }
+    });
   });
 
 // Deploy command
