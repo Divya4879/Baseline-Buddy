@@ -1,0 +1,11 @@
+{
+  "name": "react-baseline-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve -s .",
+    "build": "echo 'No build step needed for CDN version'"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
