@@ -147,7 +147,7 @@ program
     console.log(chalk.green(`Found ${results.length} feature(s):\n`));
     
     results.forEach(([id, feature], index) => {
-      const status = feature.status?.baseline?.status || false;
+      const status = feature.status?.baseline;
       const icon = status === 'high' ? '✅' : status === 'low' ? '🟡' : '🔴';
       
       console.log(`${index + 1}. ${icon} ${chalk.bold(feature.name)}`);

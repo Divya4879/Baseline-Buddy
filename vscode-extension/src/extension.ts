@@ -3,12 +3,12 @@ import { features } from 'web-features';
 
 // Feature detection patterns
 const CSS_PATTERNS = new Map([
-  ['css-grid', /display:\s*grid/gi],
-  ['css-flexbox', /display:\s*flex/gi],
-  ['css-custom-properties', /var\s*\(/gi],
-  ['css-has', /:has\s*\(/gi],
-  ['css-container-queries', /@container\s+/gi],
-  ['css-cascade-layers', /@layer\s+/gi],
+  ['grid', /display:\s*grid/gi],
+  ['flexbox', /display:\s*flex/gi],
+  ['custom-properties', /var\s*\(/gi],
+  ['has', /:has\s*\(/gi],
+  ['container-queries', /@container\s+/gi],
+  ['cascade-layers', /@layer\s+/gi],
 ]);
 
 const JS_PATTERNS = new Map([
@@ -119,12 +119,12 @@ class BaselineHoverProvider implements vscode.HoverProvider {
     let statusText = '';
     let statusIcon = '';
 
-    if (baseline?.status === 'high') {
+    if (baseline === 'high') {
       statusIcon = '✅';
       statusText = 'Widely available (Baseline high)';
-    } else if (baseline?.status === 'low') {
+    } else if (baseline === 'low') {
       statusIcon = '🟡';
-      statusText = `Newly available (Baseline low since ${baseline.low_date || 'unknown'})`;
+      statusText = `Newly available (Baseline low)`;
     } else {
       statusIcon = '🔴';
       statusText = 'Not yet Baseline - use with caution';
@@ -153,9 +153,9 @@ class BaselineHoverProvider implements vscode.HoverProvider {
     }
 
     // Recommendations
-    if (baseline?.status === false) {
+    if (baseline === false) {
       markdown.appendMarkdown(`**💡 Recommendation:** Consider using a polyfill or alternative approach for broader browser support.\n\n`);
-    } else if (baseline?.status === 'low') {
+    } else if (baseline === 'low') {
       markdown.appendMarkdown(`**💡 Recommendation:** Safe to use with modern browser targets. Consider feature detection for older browsers.\n\n`);
     } else {
       markdown.appendMarkdown(`**💡 Recommendation:** Safe to use in production!\n\n`);
@@ -197,7 +197,7 @@ class BaselineDiagnosticProvider {
         
         matches.forEach(match => {
           const feature = (features as any)[featureId];
-          if (feature && feature.status?.baseline?.status === false) {
+          if (feature && feature.status?.baseline === false) {
             const startPos = new vscode.Position(lineIndex, match.index || 0);
             const endPos = new vscode.Position(lineIndex, (match.index || 0) + match[0].length);
             const range = new vscode.Range(startPos, endPos);
@@ -252,7 +252,7 @@ function checkDocumentCompatibility(document: vscode.TextDocument) {
   detectedFeatures.forEach(featureId => {
     const feature = (features as any)[featureId];
     if (feature) {
-      const status = feature.status?.baseline?.status;
+      const status = feature.status?.baseline;
       if (status === 'high') safeCount++;
       else if (status === 'low') cautionCount++;
       else avoidCount++;
@@ -289,7 +289,7 @@ function generateReportHTML(detectedFeatures: string[]): string {
   detectedFeatures.forEach(featureId => {
     const feature = (features as any)[featureId];
     if (feature) {
-      const status = feature.status?.baseline?.status;
+      const status = feature.status?.baseline;
       const statusIcon = status === 'high' ? '✅' : status === 'low' ? '🟡' : '🔴';
       const statusText = status === 'high' ? 'Safe' : status === 'low' ? 'Caution' : 'Avoid';
       const statusColor = status === 'high' ? '#22c55e' : status === 'low' ? '#f59e0b' : '#ef4444';

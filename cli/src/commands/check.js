@@ -1,7 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
-const { features } = require('web-features');
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
 
 // Feature detection patterns mapped to actual web-features IDs
 const PATTERNS = {
@@ -17,7 +16,7 @@ const PATTERNS = {
   'destructuring': /\{.*\}\s*=/gi
 };
 
-function checkCommand(projectPath = '.', options = {}) {
+export function checkCommand(projectPath = '.', options = {}) {
   const { output = 'json', file, baselineLevel = '2024' } = options;
   
   try {
@@ -33,25 +32,25 @@ function checkCommand(projectPath = '.', options = {}) {
     // Scan files
     const detectedFeatures = scanDirectory(absolutePath);
     
-    // Analyze features
-    const analysis = analyzeFeatures(detectedFeatures, baselineLevel);
-    
-    // Display results
-    displaySummary(analysis);
-    
-    // Generate report
-    const report = generateReport(analysis, output);
-    
-    if (file) {
-      fs.writeFileSync(file, report);
-      console.log(chalk.green(`📄 Report saved to: ${file}`));
-    } else if (output === 'html') {
-      const tempFile = path.join(process.cwd(), 'baseline-report.html');
-      fs.writeFileSync(tempFile, report);
-      console.log(chalk.green(`📄 HTML report: ${tempFile}`));
-    } else if (output === 'json') {
-      console.log('\n' + JSON.stringify(analysis, null, 2));
-    }
+    // Analyze features with real web-features data
+    analyzeFeatures(detectedFeatures, baselineLevel).then(analysis => {
+      // Display results
+      displaySummary(analysis);
+      
+      // Generate report
+      const report = generateReport(analysis, output);
+      
+      if (file) {
+        fs.writeFileSync(file, report);
+        console.log(chalk.green(`📄 Report saved to: ${file}`));
+      } else if (output === 'html') {
+        const tempFile = path.join(process.cwd(), 'baseline-report.html');
+        fs.writeFileSync(tempFile, report);
+        console.log(chalk.green(`📄 HTML report: ${tempFile}`));
+      } else if (output === 'json') {
+        console.log('\n' + JSON.stringify(analysis, null, 2));
+      }
+    });
     
   } catch (error) {
     console.error(chalk.red(`❌ Analysis failed: ${error.message}`));
@@ -98,9 +97,14 @@ function scanDirectory(dirPath) {
   return Array.from(detectedFeatures);
 }
 
-function analyzeFeatures(detectedFeatures, baselineLevel) {
+async function analyzeFeatures(detectedFeatures, baselineLevel) {
   const results = [];
   let safe = 0, caution = 0, avoid = 0;
+  
+  // Import real web-features data
+  const webFeaturesModule = await import('web-features');
+  const webFeatures = webFeaturesModule.default || webFeaturesModule;
+  const features = webFeatures.features || webFeatures;
   
   for (const featureId of detectedFeatures) {
     const feature = features[featureId];
@@ -193,5 +197,3 @@ ${analysis.features.map(f => `<div class="feature">${f.message}</div>`).join('')
   
   return JSON.stringify(analysis, null, 2);
 }
-
-module.exports = { checkCommand };

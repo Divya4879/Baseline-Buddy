@@ -28,11 +28,12 @@ ls -la
 ```bash
 # Test the integration
 baseline-buddy test
+# ✅ web-features loaded successfully
 # ✅ Loaded 519 web features from Baseline data
 
 # Search any feature instantly  
-baseline-buddy search "grid"
-baseline-buddy search "container queries" --limit=2
+baseline-buddy search "grid" --limit=3
+baseline-buddy search "flexbox" --limit=2
 
 # Create project with safe defaults
 baseline-buddy init hackathon-demo --template=html
@@ -45,14 +46,19 @@ cd hackathon-demo
 baseline-buddy check
 ```
 
-**Say**: "It detected Grid, Flexbox, and Custom Properties as safe, giving us a 75% compatibility score. Let me generate a visual report:"
+**Say**: "It detected Grid, Flexbox, and Custom Properties as safe, giving us a 75% compatibility score. The analysis shows 3 safe features and 1 that needs attention:"
 
 ```bash
-baseline-buddy check --output=html
+baseline-buddy check
+# 📊 Compatibility Summary
+# Baseline Score: 75%
+# ✅ Safe: 3 | ⚠️ Caution: 0 | ❌ Avoid: 1
 ```
 
 **Show**: Open the HTML report in browser
 **Say**: "This gives teams visual compatibility insights with actionable recommendations."
+
+**Alternative if needed**: Show the JSON output and explain the scoring system.
 
 ---
 
@@ -84,18 +90,23 @@ baseline-buddy check --output=html
 
 ---
 
-### 🎬 Scene 4: Web Dashboard (45 seconds)
+### 🎬 Scene 4: VS Code Integration (60 seconds)
 
-**Visual**: Browser with the web dashboard
-**Say**: "The web dashboard provides team collaboration and visual insights."
+**Visual**: VS Code with the extension active
+**Say**: "The VS Code extension provides real-time guidance as you code. Let me show you the compiled extension:"
 
 **Show**:
-1. Navigate to the dashboard
-2. Show the stats: "519 total features, 234 widely available, 89 newly available"
-3. Search for "flexbox" → Show results with status
-4. Click "Generate Demo Report" → Show live compatibility analysis
+```bash
+ls vscode-extension/out/extension.js
+# Show the extension is compiled and ready
+```
 
-**Say**: "Teams can explore features, generate reports, and track their adoption of modern web standards."
+**Say**: "In VS Code, developers get real-time feedback when hovering over CSS and JavaScript features. The extension uses the same web-features data to show Baseline compatibility status, browser support, and recommendations directly in the editor."
+
+**Alternative demo**: Show the extension test results:
+```bash
+cd vscode-extension && node test-simple.js
+```
 
 ---
 
@@ -106,9 +117,13 @@ baseline-buddy check --output=html
 
 **Show**: Quick terminal commands
 ```bash
-baseline-buddy search "flexbox"
-baseline-buddy init another-project  
-baseline-buddy check another-project
+baseline-buddy search "flexbox" --limit=2
+# 🔎 Searching for: "flexbox"
+# Found 2 feature(s):
+# 1. 🔴 Flexbox - Status: Not yet Baseline
+# 2. 🔴 Flexbox gap - Status: Not yet Baseline
+
+baseline-buddy --help  # Show the beautiful banner
 ```
 
 **Say**: "Complete workflow from learning to building to deploying with confidence."
@@ -168,18 +183,21 @@ cat README.md | head -10
 
 ```bash
 # If CLI fails
-node cli/src/index.js test
+cd /home/divya/baseline-buddy && baseline-buddy test
 
 # If project exists  
-rm -rf hackathon-demo && baseline-buddy init hackathon-demo
+rm -rf hackathon-demo && baseline-buddy init hackathon-demo --template=html
 
-# If VS Code extension doesn't show
-# Just demonstrate the compiled extension exists
-ls vscode-extension/out/extension.js
+# Quick feature demos
+baseline-buddy search "css" --limit=2
+baseline-buddy --version
 
-# If web dashboard fails
-# Show the built version
-ls web-dashboard/out/
+# Show polyfill functionality
+baseline-buddy polyfill index.html --browsers "ie 11"
+
+# If VS Code extension demo needed
+cd vscode-extension && node test-simple.js
+ls out/extension.js
 ```
 
 ## 🎬 Pro Recording Tips
