@@ -1,0 +1,70 @@
+{
+  "name": "baseline-buddy",
+  "version": "1.0.0",
+  "description": "AI-powered developer companion that integrates Baseline data to accelerate modern web feature adoption",
+  "main": "index.js",
+  "bin": {
+    "baseline-buddy": "./cli/bin/baseline-buddy.js",
+    "bb": "./cli/bin/baseline-buddy.js"
+  },
+  "scripts": {
+    "dev": "node cli/src/index.js",
+    "build": "npm run build:cli && npm run build:extension && npm run build:web",
+    "build:cli": "cd cli && npm run build",
+    "build:extension": "cd vscode-extension && npm run build",
+    "build:web": "cd web-dashboard && npm run build",
+    "test": "npm run test:cli && npm run test:extension",
+    "test:cli": "cd cli && npm test",
+    "test:extension": "cd vscode-extension && npm test",
+    "lint": "eslint . --ext .js,.ts,.tsx",
+    "format": "prettier --write .",
+    "demo": "node scripts/demo.js",
+    "install:all": "npm install && npm run install:workspaces",
+    "install:workspaces": "npm install --workspaces"
+  },
+  "keywords": [
+    "baseline",
+    "web-features",
+    "developer-tools",
+    "cli",
+    "vscode",
+    "compatibility",
+    "modern-web",
+    "ai-assistant",
+    "scaffolding"
+  ],
+  "author": "Divya",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/baseline-buddy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/baseline-buddy/issues"
+  },
+  "homepage": "https://baseline-buddy.dev",
+  "workspaces": [
+    "cli",
+    "vscode-extension",
+    "web-dashboard",
+    "shared",
+    "templates"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "web-features": "^3.1.0"
+  }
+}
