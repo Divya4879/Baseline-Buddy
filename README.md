@@ -8,7 +8,7 @@
 
 ## 🎯 Problem Statement
 
-Web developers waste **30+ minutes daily** jumping between MDN, Can I Use, and blog posts just to decide if modern web features are production-ready. This uncertainty creates a productivity tax that slows down the adoption of modern web standards and frustrates developers worldwide.
+Web developers waste about **10-30 minutes regularly** jumping between MDN, Can I Use, and blog posts just to decide if modern web features are production-ready. This uncertainty creates a productivity tax that slows down the adoption of modern web standards and frustrates developers worldwide.
 
 ## 💡 Solution
 
@@ -19,13 +19,13 @@ Web developers waste **30+ minutes daily** jumping between MDN, Can I Use, and b
 - 📊 **Project Scaffolding** - Generate projects with Baseline-safe features
 - 🔍 **Compatibility Analysis** - Automated scoring and recommendations
 
-## 🏆 Hackathon Alignment
+## 🏆 Baseline Buddy's Capabilities
 
-### ✅ **Requirements Met**
+### ✅ **Functionalities**
 
-- **Baseline Integration**: Uses official `web-features` npm package (519+ features)
+- **Baseline Integration**: Uses official `web-features` npm package (519 features)
 - **Developer Tools**: CLI, VS Code extension, project scaffolding, linting
-- **Real-world Problem**: Solves daily developer productivity pain
+- **Real-world Problem**: Solves a regular developer productivity pain point
 - **Open Source**: MIT licensed with full source code
 - **Innovation**: First comprehensive Baseline ecosystem for developers
 - **Usefulness**: Integrates with tools used by millions of developers
@@ -89,7 +89,7 @@ baseline-buddy polyfill index.html --browsers "ie 11"
 ### CLI Installation
 ```bash
 # Clone repository
-git clone https://github.com/your-username/baseline-buddy.git
+git clone https://github.com/Divya4879/Baseline-Buddy.git
 cd baseline-buddy
 
 # Install dependencies
@@ -116,31 +116,6 @@ npm run compile
 # 4. Select the compiled .vsix file
 ```
 
-## 🎬 Demo
-
-### **3-Minute Demo Commands**
-```bash
-# 1. Test integration (shows 519 features loaded)
-baseline-buddy test
-
-# 2. Search features with real Baseline status
-baseline-buddy search "grid" --limit 2
-
-# 3. Create project with safe defaults
-baseline-buddy init demo-project --template html
-
-# 4. Analyze compatibility (shows 75% score)
-cd demo-project && baseline-buddy check
-
-# 5. Show VS Code extension status
-cd ../vscode-extension && node test-simple.js
-
-# 6. Additional feature search
-cd .. && baseline-buddy search "flexbox" --limit 2
-```
-
-**Expected Output**: Professional CLI with colored output, real Baseline data, compatibility scoring, and working VS Code extension.
-
 ## 📊 Impact & Innovation
 
 ### 🔥 **Innovation**
@@ -150,17 +125,17 @@ cd .. && baseline-buddy search "flexbox" --limit 2
 - **Real-time feedback** - instant compatibility insights while coding
 
 ### 💪 **Usefulness**
-- **Saves 30+ minutes daily** per developer
+- **Saves about 10-20 minutes regularly** per developer
 - **Reduces browser compatibility bugs** by 80%
 - **Accelerates modern feature adoption** safely
 - **Integrates with existing workflows** seamlessly
 - **Serves millions of developers** using VS Code and CLI tools
 
 ### 📈 **Real-world Applications**
-- **Development Teams** - Standardize on safe features
-- **Open Source Projects** - Ensure broad compatibility  
-- **Educational Institutions** - Teach modern web development
-- **Enterprise** - Reduce support costs and technical debt
+- **Development Teams** - Standardizes on safe features
+- **Open Source Projects** - Ensures broad compatibility  
+- **Educational Institutions** - Teaches modern web development
+- **Enterprise** - Reduces support costs and technical debt
 
 ## 🏗️ Architecture
 
@@ -188,7 +163,7 @@ baseline-buddy/
 #### **1. Clone and Setup**
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/baseline-buddy.git
+git clone https://github.com/Divya4879/Baseline-Buddy.git
 cd baseline-buddy
 
 # Install root dependencies
@@ -379,164 +354,7 @@ baseline-buddy check --output html
 # Generates detailed HTML report for documentation
 ```
 
-## 🤝 Contributing
-
-We welcome contributions from the developer community! Baseline Buddy is built to solve real developer problems, and we'd love your help making it even better.
-
-### **How to Contribute**
-
-#### **1. Fork and Setup**
-```bash
-# Fork the repository on GitHub, then:
-git clone https://github.com/YOUR-USERNAME/baseline-buddy.git
-cd baseline-buddy
-
-# Install dependencies
-npm install
-cd cli && npm install && cd ..
-cd vscode-extension && npm install && cd ..
-
-# Create a feature branch
-git checkout -b feature/your-feature-name
-```
-
-#### **2. Development Workflow**
-
-**CLI Development:**
-```bash
-cd cli
-npm run dev                    # Development mode
-npm test                       # Run tests
-baseline-buddy test           # Test your changes
-```
-
-**VS Code Extension Development:**
-```bash
-cd vscode-extension
-npm run compile               # Compile TypeScript
-npm run watch                 # Watch mode for development
-node test-simple.js          # Test compilation
-```
-
-#### **3. Testing Your Changes**
-```bash
-# Test CLI changes
-baseline-buddy test
-baseline-buddy search "your-test-query"
-baseline-buddy init test-contrib --template html
-
-# Test VS Code extension
-cd vscode-extension && node test-simple.js
-
-# Run integration tests
-npm run test:integration
-```
-
-#### **4. Submission Guidelines**
-
-**Before submitting a PR:**
-- ✅ All tests pass (`npm test`)
-- ✅ Code follows existing style
-- ✅ New features include tests
-- ✅ Documentation updated
-- ✅ Baseline data integration maintained
-
-**PR Requirements:**
-- Clear description of changes
-- Link to issue (if applicable)
-- Screenshots/demos for UI changes
-- Updated README if needed
-
-### **Areas for Contribution**
-
-#### **🔥 High Priority**
-- **New Templates** - React, Vue, Angular project templates
-- **Additional Linters** - ESLint, Stylelint integration
-- **CI/CD Integration** - GitHub Actions, Jenkins plugins
-- **Browser Extensions** - Chrome, Firefox developer tools
-
-#### **💡 Feature Ideas**
-- **Webpack Plugin** - Build-time compatibility checking
-- **Vite Plugin** - Development server integration
-- **Jest Matcher** - Testing framework integration
-- **Documentation Generator** - Auto-generate compatibility docs
-
-#### **🐛 Bug Reports**
-Found a bug? Please include:
-- Steps to reproduce
-- Expected vs actual behavior
-- Environment details (Node.js version, OS)
-- CLI output or error messages
-
-### **Development Setup Details**
-
-#### **Project Structure**
-```
-baseline-buddy/
-├── cli/                    # CLI tool
-│   ├── src/
-│   │   ├── commands/       # Individual commands
-│   │   └── index.js        # Main entry point
-│   └── package.json
-├── vscode-extension/       # VS Code extension
-│   ├── src/
-│   │   └── extension.ts    # Extension logic
-│   └── package.json
-├── shared/                 # Shared utilities
-├── templates/              # Project templates
-└── tests/                  # Integration tests
-```
-
-#### **Code Style**
-- **JavaScript**: ES modules, async/await
-- **TypeScript**: Strict mode, proper typing
-- **CLI**: Commander.js patterns
-- **VS Code**: Official extension guidelines
-
-#### **Testing Standards**
-- Unit tests for core functions
-- Integration tests for CLI commands
-- VS Code extension compilation tests
-- Real web-features data validation
-
-### **Community Guidelines**
-
-#### **Code of Conduct**
-- Be respectful and inclusive
-- Focus on constructive feedback
-- Help newcomers learn and contribute
-- Maintain professional communication
-
-#### **Getting Help**
-- **Issues**: Use GitHub issues for bugs and features
-- **Discussions**: Use GitHub discussions for questions
-- **Discord**: Join our community server (link in bio)
-- **Email**: maintainers@baseline-buddy.dev
-
-### **Recognition**
-
-Contributors will be:
-- ✅ Listed in CONTRIBUTORS.md
-- ✅ Mentioned in release notes
-- ✅ Invited to maintainer discussions
-- ✅ Featured in project documentation
-
-### **Maintainers**
-
-Current maintainers:
-- **@your-username** - Project lead, CLI development
-- **@contributor1** - VS Code extension
-- **@contributor2** - Documentation and community
-
-### **License**
-
-By contributing, you agree that your contributions will be licensed under the MIT License.
-
 ---
-
-**Thank you for helping make modern web development more accessible! 🚀**
-
-*Every contribution, no matter how small, makes a difference in the developer community.*
 
 ## 📄 License
 
@@ -551,15 +369,13 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 🔗 Links
 
-- **Demo Video**: [3-minute demonstration](https://youtube.com/watch?v=demo)
-- **Live Demo**: [Try Baseline Buddy](https://baseline-buddy-demo.vercel.app)
-- **Documentation**: [Full API docs](https://baseline-buddy.dev/docs)
+- **Demo Video**: [3-minute demonstration](https://youtu.be/5JUUyzA5f5k)
 - **Baseline**: [Learn about Baseline](https://web.dev/baseline)
 - **Web Features**: [Official data source](https://github.com/web-platform-dx/web-features)
 
 ## 📊 Project Stats
 
-- **519+ web features** integrated from official Baseline data
+- **519 web features** integrated from official Baseline data
 - **2 developer tools** (CLI + VS Code extension)
 - **3 core workflows** (search, analyze, scaffold)
 - **100% open source** with MIT license
