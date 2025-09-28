@@ -44,12 +44,6 @@ baseline-buddy deploy --platform=netlify --validate-compatibility
 - **Smart suggestions** for polyfills and alternatives
 - **Baseline status indicators** in hover tooltips
 
-### Web Dashboard
-- **Visual compatibility reports** for your projects
-- **Team collaboration** on Baseline adoption
-- **Progress tracking** toward modern web standards
-- **Integration** with CI/CD pipelines
-
 ## 🚀 Quick Start
 
 ### Installation
@@ -73,7 +67,6 @@ baseline-buddy check
 baseline-buddy/
 ├── cli/                    # Node.js CLI tool
 ├── vscode-extension/       # VS Code extension
-├── web-dashboard/          # React dashboard
 ├── shared/                 # Shared utilities & types
 ├── templates/              # Project templates
 └── docs/                   # Documentation
@@ -93,7 +86,7 @@ This project was built for the **Baseline Tooling Hackathon** to demonstrate how
 
 ### Key Innovation Points:
 1. **Beginner-focused approach** - Most tools target experts, we help newcomers
-2. **Multi-tool integration** - CLI + VS Code + Web dashboard working together
+2. **Multi-tool integration** - CLI + VS Code working together
 3. **Educational component** - Teaching safe modern web practices
 4. **Real-world workflow** - From scaffolding to deployment
 
